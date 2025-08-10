@@ -1,45 +1,25 @@
-document.getElementById('quiz-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+// Membuat confetti
+function createConfetti() {
+ const confetti = document.createElement('div');
+ confetti.classList.add('confetti');
+ confetti.style.left = Math.random() * window.innerWidth + 'px';
+ confetti.style.width = `${Math.random() * 10 + 5}px`;
+ confetti.style.height = confetti.style.width;
+ confetti.style.animationDuration = `${Math.random() * 2 + 3}s`;
+ document.body.appendChild(confetti);
+ setTimeout(() => confetti.remove(), 5000);
+}
 
-    // Correct answers
-    const correctAnswers = {
-        q1: 'b', // Argentina
-        q2: 'b', // Lionel Messi
-        q3: 'b', // Real Madrid
-        q4: 'c', // Brazil
-        q5: 'a', // Alan Shearer
-        q6: 'a'  // Uruguay
-    };
+// Membuat efek kilau (sparkle)
+function createSparkle() {
+ const sparkle = document.createElement('div');
+ sparkle.classList.add('sparkle');
+ sparkle.style.left = Math.random() * window.innerWidth + 'px';
+ sparkle.style.top = Math.random() * window.innerHeight + 'px';
+ document.body.appendChild(sparkle);
+ setTimeout(() => sparkle.remove(), 3000);
+}
 
-    let score = 0;
-    const totalQuestions = Object.keys(correctAnswers).length;
-    let allAnswered = true;
-
-    // Check each question
-    for (let i = 1; i <= totalQuestions; i++) {
-        const question = `q${i}`;
-        const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
-        
-        if (!selectedAnswer) {
-            allAnswered = false;
-            break;
-        }
-
-        if (selectedAnswer.value === correctAnswers[question]) {
-            score++;
-        }
-    }
-
-    // Display result
-    const resultDiv = document.getElementById('result');
-    if (!allAnswered) {
-        resultDiv.textContent = 'Please answer all questions!';
-        resultDiv.classList.add('fail');
-        resultDiv.style.display = 'block';
-    } else {
-        resultDiv.textContent = `You scored ${score} out of ${totalQuestions}!`;
-        resultDiv.classList.remove('fail');
-        resultDiv.classList.add(score >= Math.ceil(totalQuestions / 2) ? 'success' : 'fail');
-        resultDiv.style.display = 'block';
-    }
-});
+// Membuat confetti dan sparkle secara berkala
+setInterval(createConfetti, 50); // Lebih sering untuk efek meriah
+setInterval(createSparkle, 200);
