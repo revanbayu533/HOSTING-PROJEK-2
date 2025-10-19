@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Selamat Ulang Tahun, Icii!</title>
- <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Utama</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #tidak {
+      position: absolute;
+      transition: all 0.4s ease; /* transisi halus */
+    }
+  </style>
 </head>
 <body>
- <div class="container">
-   <h1>Selamat Ulang Tahun, Icii</h1>
-   <p>Hari ini ulang tahun ke-17 ya. Semoga di umur ke-17 ini Icii sehat selalu, panjang umur, dan rezekinya dilimpahkan. Aamiin.
-    sama satu lagi jangan lupa bahagia selalu yaa, jangan begadang terus ama nangis kalau ada masalah cerita aja. Aku sayang Icii bangetttt! Semoga icii jadi pacar aku :) 
-   </p>
-   <audio controls autoplay loop>
-     <source src="Nadhif Basalamah - bergema sampai selamanya (Official Lyric Video).mp3" type="audio/mpeg">
-   </audio>
- </div>
+  <h1>Apakah kamu mau lihat hadiah?</h1>
 
- <div class="hearts">
-   <div class="heart"></div>
-   <div class="heart"></div>
-   <div class="heart"></div>
- </div>
+  <button onclick="window.location.href='index.html'">Ya</button>
+  <button id="tidak" onclick="gerak()">Tidak</button>
 
- <script src="script.js"></script>
+  <script>
+    const tombol = document.getElementById("tidak");
+
+    function gerak() {
+      const lebar = window.innerWidth - 100;
+      const tinggi = window.innerHeight - 50;
+
+      const posisiX = Math.random() * lebar;
+      const posisiY = Math.random() * tinggi;
+
+      tombol.style.left = posisiX + "px";
+      tombol.style.top = posisiY + "px";
+    }
+  </script>
 </body>
 </html>
