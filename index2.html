@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Utama</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #tidak {
+      position: absolute;
+      transition: all 0.4s ease; /* transisi halus */
+    }
+  </style>
+</head>
+<body>
+  <h1>Apakah kamu mau lihat hadiah?</h1>
+
+  <button onclick="window.location.href='hadiah.html'">Ya</button>
+  <button id="tidak" onclick="gerak()">Tidak</button>
+
+  <script>
+    const tombol = document.getElementById("tidak");
+
+    function gerak() {
+      const lebar = window.innerWidth - 100;
+      const tinggi = window.innerHeight - 50;
+
+      const posisiX = Math.random() * lebar;
+      const posisiY = Math.random() * tinggi;
+
+      tombol.style.left = posisiX + "px";
+      tombol.style.top = posisiY + "px";
+    }
+  </script>
+</body>
+</html>
