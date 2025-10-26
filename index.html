@@ -4,27 +4,175 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halaman Utama</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body {
       text-align: center;
       font-family: Arial;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 250vh;
+      overflow-y: auto;
+      background: linear-gradient(to top right, #ff9a9e, #fad0c4);
+      color: white;
+      margin: 0;
+      padding: 0;
       position: relative;
     }
 
+    h1 {
+      margin-top: 150px;
+      font-size: 2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    .tombol-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      font-weight: bold;
+    }
+
+    .ya {
+      background-color: #ff4b5c;
+      color: white;
+    }
+
+    .ya:hover {
+      background-color: #ff6b7c;
+      transform: scale(1.1);
+    }
+
     #tidak {
+      background-color: #ffffff;
+      color: #ff4b5c;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    #tidak:hover {
+      transform: scale(1.1);
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
       position: absolute;
-      transition: all 0.4s ease; /* transisi halus */
+      bottom: -10%;
+      width: 40px;
+      height: 40px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -20px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 20px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      margin-top: 400px;
+      font-size: 1.2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    .gambar-bawah {
+      display: block;
+      margin: 40px auto 10px auto;
+      width: 250px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 100, 100, 0.6);
+      animation: fadeInUp 2s ease forwards;
+      z-index: 2;
+      position: relative;
+    }
+
+    .teks-bawah {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+      padding-bottom: 100px;
+      z-index: 2;
+      position: relative;
+      animation: fadeInUp 2.5s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Apakah kamu mau lihat hadiah?</h1>
+  <h1>Apakah kamu mau lihat ucapan dari yang buat website ini?</h1>
 
-  <button onclick="window.location.href='index2.html'">Ya</button>
-  <button id="tidak" onclick="gerak()">Tidak</button>
+  <footer>Scroll sampai bawah... mungkin ada kejutan!</footer>
+
+  <img src="ici.jpeg" alt="Hadiah" class="gambar-bawah">
+
+  <div class="teks-bawah">
+    ini adalah pap pertama yang kamu kirim ke aku full muka kamu
+    makasih ya udah mau jadi temen aku :)
+    semoga kamu mau ngasih tau nama asli kamu
+    selanjutnya silahkan klik "Ya" di bawah gambar kamu untuk lihat ucapannya!
+    kalau kamu masih penasaran klik "Tidak" ya coba aja.
+  </div>
+
+   <div class="tombol-container">
+    <button class="ya" onclick="window.location.href='index2.html'">Ya</button>
+    <button id="tidak" onclick="gerak()">Tidak</button>
+  </div>
+
+  <div class="hearts"></div>
 
   <script>
     const tombol = document.getElementById("tidak");
@@ -32,12 +180,21 @@
     function gerak() {
       const lebar = window.innerWidth - 100;
       const tinggi = window.innerHeight - 50;
-
       const posisiX = Math.random() * lebar;
       const posisiY = Math.random() * tinggi;
-
+      tombol.style.position = "absolute";
       tombol.style.left = posisiX + "px";
       tombol.style.top = posisiY + "px";
+    }
+
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+      heart.style.opacity = Math.random();
+      heartsContainer.appendChild(heart);
     }
   </script>
 </body>

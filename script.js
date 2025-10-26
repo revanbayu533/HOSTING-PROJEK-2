@@ -11,3 +11,13 @@ function createHeart() {
 }
 
 setInterval(createHeart, 500);
+
+
+ function cekKataRahasia() {
+     const input = document.getElementById("secretInput").value.trim().toLowerCase();
+     if (input === "icii") {
+       window.location.href = "secret.html";
+     } else {
+       alert("Kata rahasia salah! Coba lagi ya :)");
+     }
+   }
