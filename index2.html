@@ -4,38 +4,148 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Selamat Ulang Tahun, Icii!</title>
- <link rel="stylesheet" href="style.css">
+ <style>
+   body {
+     margin: 0;
+     padding: 0;
+     background: linear-gradient(to top right, #ffb6b9, #fad0c4);
+     font-family: "Times New Roman", serif;
+     overflow: hidden;
+     color: #fff;
+     text-align: center;
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+   }
+
+   .container {
+     z-index: 2;
+     max-width: 500px;
+     background: rgba(255, 255, 255, 0.7);
+     color: black;
+     padding: 25px;
+     border-radius: 15px;
+     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+   }
+
+   input {
+     padding: 10px;
+     border-radius: 20px;
+     border: none;
+     text-align: center;
+     width: 70%;
+   }
+
+   button {
+     margin-top: 10px;
+     padding: 10px 20px;
+     border: none;
+     border-radius: 20px;
+     background-color: #ff4b5c;
+     color: white;
+     cursor: pointer;
+     transition: 0.3s;
+   }
+
+   button:hover {
+     background-color: #ff6b7c;
+     transform: scale(1.05);
+   }
+
+   .hearts {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     pointer-events: none;
+     z-index: 1;
+   }
+
+   .heart {
+     position: absolute;
+     bottom: -10%;
+     width: 30px;
+     height: 30px;
+     background: red;
+     transform: rotate(-45deg);
+     animation: float 6s linear infinite;
+   }
+
+   .heart::before,
+   .heart::after {
+     content: "";
+     position: absolute;
+     width: 30px;
+     height: 30px;
+     background: red;
+     border-radius: 50%;
+   }
+
+   .heart::before {
+     top: -15px;
+     left: 0;
+   }
+
+   .heart::after {
+     left: 15px;
+     top: 0;
+   }
+
+   @keyframes float {
+     0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+     100% { transform: translateY(-120vh) rotate(-45deg); opacity: 0; }
+   }
+ </style>
 </head>
 <body>
  <div class="container">
- <h1>Selamat Ulang Tahun, Icii</h1>
-<p>
-Selamat ulang tahun yang ke-17, Icii.  
-Semoga kamu selalu diberi kesehatan, kebahagiaan, dan semua hal baik yang kamu impikan.  
-Aku tahu kita belum pernah ketemu langsung, tapi aku merasa kamu sudah berarti banyak buat aku.  
-Setiap obrolan sama kamu selalu bikin aku senyum sendiri.  
-Aku beneran sayang sama kamu, Icii.  
-Dan... ada sedikit kejutan buat kamu di bawah, coba scroll ya.
-</p>
+   <h1>Selamat Ulang Tahun, Icii 🎉</h1>
+   <p>
+     Selamat ulang tahun yang ke-17, Icii.  
+     Semoga kamu selalu diberi kesehatan, kebahagiaan, dan semua hal baik yang kamu impikan.  
+     Aku tahu kita belum pernah ketemu langsung, tapi kamu sudah berarti banyak buat aku.  
+     Setiap obrolan sama kamu selalu bikin aku senyum sendiri.  
+     Aku beneran sayang sama kamu, Icii.  
+     Dan... ada sedikit kejutan buat kamu di bawah, coba scroll ya.
+   </p>
 
-   <div style="margin-top: 40px;">
-     <p>Ketik kata rahasia untuk lanjut:</p>
-     <input type="text" id="secretInput" placeholder="Masukkan kata icii" style="padding:10px;border-radius:20px;border:none;text-align:center;">
-     <br>
-     <button onclick="cekKataRahasia()" style="margin-top:10px;padding:10px 20px;border:none;border-radius:20px;background-color:#ff4b5c;color:white;cursor:pointer;">Kirim</button>
-   </div>
+   <p>Ketik kata rahasia untuk lanjut:</p>
+   <input type="text" id="secretInput" placeholder="Masukkan kata icii">
+   <br>
+   <button onclick="cekKataRahasia()">Kirim</button>
 
    <audio autoplay loop hidden>
      <source src="Nadhif Basalamah - bergema sampai selamanya (Official Lyric Video).mp3" type="audio/mpeg">
    </audio>
  </div>
 
- <div class="hearts">
-   <div class="heart"></div>
-   <div class="heart"></div>
-   <div class="heart"></div>
- </div>
+ <div class="hearts"></div>
 
- <script src="script.js"></script>
+ <script>
+   // Animasi hati
+   const heartsContainer = document.querySelector('.hearts');
+   function createHeart() {
+     const heart = document.createElement('div');
+     heart.classList.add('heart');
+     heart.style.left = Math.random() * 100 + 'vw';
+     heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+     heartsContainer.appendChild(heart);
+     setTimeout(() => heart.remove(), 7000);
+   }
+   setInterval(createHeart, 500);
+
+   // Cek kata rahasia
+   function cekKataRahasia() {
+     const input = document.getElementById("secretInput").value.trim().toLowerCase();
+     if (input === "icii") {
+       window.location.href = "secret.html";
+     } else {
+       alert("Kata rahasia salah! Coba lagi ya :)");
+     }
+   }
+ </script>
 </body>
 </html>
